@@ -13,12 +13,11 @@ function App(){
   return (
     <View style={styles.container}>
       <FlatList
-        style={{width: '100%', borderWidth: 1, flexDirection: 'row'}}
+        style={{width: '100%',flexDirection: 'row'}}
         data={Array(20).fill(0)}
         horizontal
         contentContainerStyle={{
           flexGrow: 1,
-          borderWidth: 1,
           justifyContent: 'center',
           alignItems: 'center',
         }}
