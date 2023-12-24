@@ -1,32 +1,32 @@
 import React from 'react'
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
+import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSpring, withTiming } from 'react-native-reanimated';
 import AnimatedText from './src/componenet/Text/AnimatedText';
+import MemorizedItem from './src/list/MemorizedItem';
 
 function App(){
-
-  const fluctuateDelay = (index:number)=>{
-    return 0
-  }
-  
+   
+  const renderItem = React.useCallback(function({item,index}:any){
+    return (
+      <MemorizedItem item={item} index={index} />
+    );
+  },[])
 
   return (
     <View style={styles.container}>
       <FlatList
-        style={{width: '100%',flexDirection: 'row'}}
+        style={{width: '100%'}}
         data={Array(20).fill(0)}
-        horizontal
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={10}
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        renderItem={({i, index}: any) => (
-          <AnimatedText
-            delay={fluctuateDelay(index)}
-            value={Number(Math.random().toFixed(1))}
-          />
-        )}
+        renderItem={renderItem}
+        keyExtractor={(_,index)=>index.toString()}
       />
     </View>
   );

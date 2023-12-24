@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -12,6 +12,7 @@ interface Props {
     delay?:number,
     value:number
 }
+
 
 function AnimatedText(Props:Props) {
     let delay = Props.delay !== undefined ? Props.delay : 0;
@@ -28,7 +29,7 @@ function AnimatedText(Props:Props) {
           withRepeat(
             withTiming(
               Number(Number(0.2 + Math.random()).toFixed(1)),
-              {duration:200},
+              {duration:300},
             ),
             1,
             true,
@@ -37,7 +38,7 @@ function AnimatedText(Props:Props) {
                 delay,
                 withTiming(
                   Number(Number(0.2 + Math.random()).toFixed(1)),
-                  {duration: 100},
+                  {duration: 200},
                   start,
                 ),
               );
@@ -62,9 +63,9 @@ function AnimatedText(Props:Props) {
     }, []);
 
   return (
-      <View style={styles.container}>
+    <View style={styles.container}>
         <Animated.View style={[styles.box, animatedStyles]} />
-      </View>
+    </View>
   );
 }
 
@@ -72,7 +73,7 @@ export default React.memo(AnimatedText)
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal:2
+    marginHorizontal:2,
   },
   box: {
     height: 35,
